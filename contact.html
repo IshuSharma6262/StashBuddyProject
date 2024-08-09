@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/utils.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/contact.css" />
+    <link rel="stylesheet" href="css/mobile.css" />
+    <title>StashBuddy</title>
+  </head>
+  <body>
+    <nav class="navigation max-width-1 m-auto">
+      <div class="nav-left">
+        <span>StashBuddy</span>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about-page.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="max-width-1 m-auto">
+      <hr />
+    </div>
+    <div class="contact-content font1">
+      <div class="max-width-1 m-auto">
+        <h1>Contact Us to list your products on the website</h1>
+        <div class="contact-form">
+          <form action="" name="submit-to-google-sheet">
+            <div class="form-box">
+              <input name="name" type="text" placeholder="Enter your Name" />
+            </div>
+            <div class="form-box">
+              <input
+                name="roll"
+                type="text"
+                placeholder="Enter your TIET Mail-ID"
+              />
+            </div>
+            <div class="form-box">
+              <input
+                name="number"
+                type="text"
+                placeholder="Enter your Contact Number"
+              />
+            </div>
+            <div class="form-box">
+              <input
+                name="hostel"
+                type="text"
+                placeholder="Enter your Hostel Name"
+              />
+            </div>
+            <div class="form-box">
+              <input
+                name="product"
+                type="text"
+                placeholder="Enter Product Name"
+              />
+            </div>
+            <div class="form-box">
+              <textarea
+                name="details"
+                id=""
+                cols="30"
+                rows="10"
+                placeholder="Enter Product Details"
+              ></textarea>
+            </div>
+            <div class="form-box">
+              <button class="btn">Submit</button>
+            </div>
+          </form>
+          <span id="form-msg"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer m-auto">
+      <p>Copyright &copy; stashbuddy.com</p>
+      <a href="https://www.vecteezy.com/free-vector/ecommerce"
+        >Vector Credits: Vecteezy</a
+      >
+    </div>
+    <script>
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbzo6Ze7dFNeNFzElMLGzqE-fdGPICReRvkjCa_Qi9l-Un3tBsdcImIjrdKq6vAwoe8VtA/exec";
+      const form = document.forms["submit-to-google-sheet"];
+
+      const msg = document.getElementById("form-msg");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) => {
+              msg.innerHTML = "Message sent successfully!"
+              setTimeout(function(){
+                msg.innerHTML = ""                
+              }, 5000);
+              form.reset()
+          })
+          .catch((error) => console.error("Error!", error.message));
+      });
+    </script>
+  </body>
+</html>
